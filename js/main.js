@@ -87,6 +87,8 @@ function onChatItemClick(evt){
 	var imgURL = evt.currentTarget.getElementsByClassName('wh-44')[0].src;
 	
 	actualizarHeaderChats(contactName, imgURL, "conectado");
+    
+    crearListaChats();
 }
 
 
@@ -123,7 +125,8 @@ function onMensajeKey(evt){
 }
 
 function crearMensaje(_mensaje){
-	var htmlMensajeIn = '<div class="w-message w-message-in">'+
+    
+    var htmlMensajeIn = '<div class="w-message w-message-in">'+
 		'<div class="w-message-text">'+
 	  	'<h5 class="green-1">Maria Paula Rivarola</h5>'+
 	  	'<p>Jajaja Sii finalmente se corto!!</p>'
@@ -140,16 +143,23 @@ function crearMensaje(_mensaje){
 	  					 +'</div>'
 	  					 +'</div>';
 	
-		
-	var elConversacion = document.getElementById("conversacion");
+    var mensaje = liListItem.getElementsByClassName("w-last-message")[0];
+    mensaje.innerHTML = _mensaje;
+    
+    var elChat = document.getElementById('chat'); 	
+    elChat.innerHTML += htmlMensajeOut;
+    elChat.scrollTop = elChat.scrollHeight;
+    
+	/*var elConversacion = document.getElementById("conversacion");
 	elConversacion.innerHTML += htmlMensajeOut;
 	
 	var chat = document.getElementById("chat");
-	chat.scrollTop = chat.scrollHeight;
+	chat.scrollTop = chat.scrollHeight;¨*/
 }
 
 function crearListaChats(){
-	
+	var listaChat = document.getElementById('chat');
+    listaChat.innerHTML = "";
 }
 
 function crearChats(_mensaje){
