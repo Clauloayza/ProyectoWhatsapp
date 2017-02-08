@@ -201,3 +201,20 @@ function actualizarHeaderChats(_contactName, _imgURL, _estado){
 	chatHeader.getElementsByTagName('img')[0].src= _imgURL;
 	
 }
+
+function actualizarMensajeChats(_contactName){
+	var chat = document.getElementById('chat');
+	
+	
+	for (i=0; i<li){
+		
+		 var htmlMensajeIn = '<div class="w-message w-message-in">'+
+		                     '<div class="w-message-text">'+
+	  	                     '<h5 class="green-1">Maria Paula Rivarola</h5>'+
+	  	                     '<p>'++'</p>'
+	  			             +'<div class="time">11:13</div>'
+	  					     +'</div>'
+	  					     +'</div>';
+	}
+	
+}
