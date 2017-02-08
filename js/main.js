@@ -204,8 +204,7 @@ function actualizarHeaderChats(_contactName, _imgURL, _estado){
 
 function actualizarMensajeChats(_contactName){
 	var chat = document.getElementById('chat');
-	
-	
+		
 	for (i=0; i<li){
 		
 		 var htmlMensajeIn = '<div class="w-message w-message-in">'+
