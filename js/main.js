@@ -18,7 +18,8 @@ function chat(_nombre, _imagen, _ultimoMensaje){
 }
 
 var dataListaChats = [
-	
+    
+    new chat('Laboratoria Perú','image/logocodeacademy.png', "No se pique!!"),
 	new chat("Maricela", 'https://scontent.fsst1-2.fna.fbcdn.net/v/t1.0-9/12507303_10208308713225859_6364601605553639551_n.jpg?oh=8c7c4232e0e665aea58910644aac2bc3&oe=59012761', "hola"),
 	new chat("Fabi", 'https://scontent.fsst1-2.fna.fbcdn.net/v/t1.0-9/12974338_10207644691692894_5084372703488895898_n.jpg?oh=3673d202b9300a1982a9867d18bdc593&oe=5908769C', "holiii! Clau :3"),
 	new chat("Gio", 'https://scontent.fsst1-2.fna.fbcdn.net/v/t1.0-9/14691114_10207565720916915_3021345534883774270_n.jpg?oh=5aaee18df7e87cd4195ddd00b8de4ef0&oe=5949C8EA', "Hay Señor!!"),
@@ -55,6 +56,7 @@ function setInitChatList(){
 	
 	
 	initChatList();
+    
 }
 
 function initChatList(){
@@ -109,6 +111,7 @@ var forEach = Array.prototype.forEach;
       else
          f.parentNode.parentNode.style.display = "block";        
   });
+    
 }, 
 false);
 //-----------------------END BUSCADOR
