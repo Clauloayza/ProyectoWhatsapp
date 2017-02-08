@@ -93,8 +93,9 @@ function onChatItemClick(evt){
 
 //--------------------BUSCADOR**********
 
+	
 search.addEventListener("keyup", function(e){
-  var choice = this.value;
+var choice = this.value;
    
 var search = document.getElementById("search");
 var contacto = document.getElementsByTagName("h4");
@@ -107,8 +108,14 @@ var forEach = Array.prototype.forEach;
       else
          f.parentNode.parentNode.style.display = "block";        
   });
+	
+	onChatItemClick
 }, 
 false);
+	
+
+
+
 //-----------------------END BUSCADOR
 
 
