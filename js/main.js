@@ -29,7 +29,6 @@ var dataListaChats = [
 ];
 
 
-
 //----------------- Parte Visual
 
 var liListItem = null;
