@@ -202,6 +202,8 @@ function actualizarHeaderChats(_contactName, _imgURL, _estado){
 	
 }
 
+
+
 /*function actualizarMensajeChats(_contactName){
 	var chat = document.getElementById('chat');
 		
