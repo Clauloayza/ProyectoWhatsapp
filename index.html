@@ -13,7 +13,9 @@
 	  	<link href="css/main.css" rel="stylesheet">
 	  	<link href="css/queries.css" rel="stylesheet">
 	</head>
-	<body onload="init(event)">
+	<body>
+  	    <input type="text" id="name">
+	  	<button id="btn-ingresar" class="btn">Ingresar</button>
 	  	<div class="w-app">
 	  		<div class="container">
 	  			<aside class="col-md-4 w-contacts">
@@ -30,9 +32,10 @@
 	  				<div class="w-search icon-search">
 	  					<input type="text" placeholder="Buscar o empezar un chat nuevo" class="w-search-contacts" id="search">
 	  				</div>
-	  				<ul class="w-recent-chats" id="lista-chats">
+	  				<ul class="w-recent-chats" id="lista-usuarios">
 	  									
 	  				</ul>
+	  					  				
 	  			</aside>
 	  			<section class="col-md-8 w-contacts w-messages">
 	  				<header class="w-chat-messages clearfix" id="chat-header">
@@ -153,8 +156,10 @@
 	  							
 	  						</div>  							  						
 	  					</div>
+	  					
 	  				</section>
-
+	  				
+	  				
 	  				<footer class="pane-footer w-write-message-footer">
 	  					<ul class="w-write-message-list clearfix" >
 	  						<li class="col-xs-1 w-write-message-item icon-insert_emoticon w-write-message-icon"></li>
@@ -167,6 +172,39 @@
 	  			</section>
 	  		</div>
 	  	</div>
+	  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 		<script type="text/javascript" src="js/main.js"></script>
+		<script src="http://services.geekadvice.pe:4000/socket.io/socket.io.js"></script>
+		<script>
+			var socket;
+			
+			window.onload = function(){
+				socket =io.connect('http://services.geekadvice.pe:4000');
+				
+				socket.emit('identify',"Clau");
+				socket.on('list_users', function(_users){
+					console.log(_users);
+					drawUsers(_users);
+				});
+				
+				socket.on('new_user', function(_users){
+					$('#lista-usuarios').append('<li>'+ _users.name + '</li>');
+				});
+				
+				$('#btn-ingresar').click(identificar);
+			};
+			
+			function identificar(){
+				socket.emit('identify', $('#name').val());
+			}
+			
+			function drawUsers(_users){
+				var lista = $('#lista-usuarios');
+				
+				for(var i in _users){
+					lista.append('<li>'+_users[i].name+'</li>');
+				}
+			}
+		</script>
 	</body>
 </html>

@@ -11,9 +11,9 @@ function chat(_nombre, _imagen, _ultimoMensaje){
 	this.ultimoMensaje = _ultimoMensaje;
 	this.horaUltimoMensaje = "";
 	
-	this.eliminarMensaje = function(){
+	/*this.eliminarMensaje = function(){
 		
-	};
+	};*/
 		
 }
 
@@ -39,17 +39,17 @@ function init(){
 
 function setInitChatList(){
 	
-	var elListaChats = document.getElementById("lista-chats");
+	var elListaChats = document.getElementById("lista-usuarios");
 	
 	for (var i in dataListaChats){
 		
-		var htmlChatItem = 	'<li>'+'<div class="avatar">'+'<img src="'+dataListaChats[i].imgURL+'" class="wh-44">'
+		var htmlChatItem = 	'<li draggable ="true" ondragstart="inicioDrag(event)">'+'<div class="avatar">'+'<img src="'+dataListaChats[i].imgURL+'" class="wh-44">'
 		  						+'<h4 class="w-contact-name">'+dataListaChats[i].nombre+'</h4>'
 		  						+'<p class="w-last-message" id="mensaje">'+dataListaChats[i].ultimoMensaje+'</p>'
 		  					    +'</div>'
 								+'<div class="time" id="hora">'+dataListaChats[i].horaUltimoMensaje+'</div>'+'</li>';
 		
-	dataListaChats[i].eliminarMensaje();
+	dataListaChats[i];
 	elListaChats.innerHTML += htmlChatItem;
 	}
 	
@@ -58,9 +58,13 @@ function setInitChatList(){
     
 }
 
+ function inicioDrag(evt){
+	 console.log(evt);
+ }
+
 function initChatList(){
 	
-	var listaChats = document.getElementById('lista-chats');
+	var listaChats = document.getElementById('lista-usuarios');
 		
 	var arrListItems = listaChats.getElementsByTagName('li');
 	
@@ -89,21 +93,25 @@ function onChatItemClick(evt){
 	
 	actualizarHeaderChats(contactName, imgURL, "conectado");
     
+	actualizarMensajeChats(contactName);
     crearListaChats();
+	
 }
 
 
 
 //--------------------BUSCADOR**********
 
-	
+var search = document.getElementById("search");
+var contacto = document.getElementsByTagName("h4");
+
 search.addEventListener("keyup", function(e){
 var choice = this.value;
    
-var search = document.getElementById("search");
-var contacto = document.getElementsByTagName("h4");
+
 var forEach = Array.prototype.forEach;
 
+	
 	
   forEach.call(contacto, function(f){
       if (f.innerHTML.toLowerCase().search(choice.toLowerCase()) == -1)
@@ -123,6 +131,7 @@ false);
 function onMensajeKey(evt){
 	if(evt.keyCode == 13){
 		var elInputMensaje = document.getElementById("mensajes");
+		
 		crearChats(elInputMensaje.value);
 	    crearMensaje(elInputMensaje.value);
 		elInputMensaje.value = "";
@@ -154,6 +163,9 @@ function crearMensaje(_mensaje){
     
     var elChat = document.getElementById('chat'); 	
     elChat.innerHTML += htmlMensajeOut;
+	
+	socket.emit('send_message',_mensaje);
+	
     elChat.scrollTop = elChat.scrollHeight;
     
 	/*var elConversacion = document.getElementById("conversacion");
@@ -166,10 +178,11 @@ function crearMensaje(_mensaje){
 function crearListaChats(){
 	var listaChat = document.getElementById('chat');
     listaChat.innerHTML = "";
+	
 }
 
 function crearChats(_mensaje){
-	var elListaChats = document.getElementById("lista-chats");
+	var elListaChats = document.getElementById("lista-usuarios");
 	
 	if(liListItem == null){
 	
@@ -183,7 +196,9 @@ function crearChats(_mensaje){
 								+'<div class="time" id="hora">14:27</div>';
 	
 	liListItem.innerHTML = htmlChatItem;
-	elListaChats.insertBefore(liListItem, elListaChats.childNodes[0]);
+	
+		//inserta antes del primer elemento hijo
+		elListaChats.insertBefore(liListItem, elListaChats.childNodes[0]);
 		
 	}
 	initChatList();
@@ -203,18 +218,21 @@ function actualizarHeaderChats(_contactName, _imgURL, _estado){
 
 
 
-/*function actualizarMensajeChats(_contactName){
+function actualizarMensajeChats(_contactName){
 	var chat = document.getElementById('chat');
 		
-	for (i=0; i<li){
+	for (i=0 ;i<dataListaChats.length; i++){
 		
 		 var htmlMensajeIn = '<div class="w-message w-message-in">'+
 		                     '<div class="w-message-text">'+
-	  	                     '<h5 class="green-1">Maria Paula Rivarola</h5>'+
-	  	                     '<p>'++'</p>'
+	  	                     '<h5 class="green-1">'+_contactName+'</h5>'+
+	  	                     '<p>'+dataListaChats[i].ultimoMensaje+'</p>'
 	  			             +'<div class="time">11:13</div>'
 	  					     +'</div>'
 	  					     +'</div>';
+		
+		var elChat = document.getElementById('chat'); 	
+        elChat.innerHTML += htmlMensajeIn;
 	}
 	
-}*/
+}
